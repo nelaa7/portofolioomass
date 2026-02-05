@@ -7,7 +7,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
   ListGroupItem,
   ListGroup,
@@ -44,15 +43,15 @@ export default function LandingPage() {
     };
   }, []);
 
-  // --- STYLE CONFIGURATION ---
-  
-  // 1. Style untuk HEADER (Gradasi / Gradient)
+  // --- CONFIGURATION ---
+
+  // 1. Style HEADER: Pakai Gradient
   const headerStyle = {
     background: "linear-gradient(to bottom, #190a05, #303841)" 
   };
 
-  // 2. Style untuk BAGIAN BAWAH (1 Warna Solid)
-  // Ganti kode hex "#303841" ini kalau mau ganti warna dasar webnya
+  // 2. Style SISA BODY: Pakai 1 Warna Solid
+  // (Pastikan warna ini sama dengan warna akhir gradient header biar nyambung)
   const bodyStyle = {
     background: "#303841" 
   };
@@ -61,8 +60,9 @@ export default function LandingPage() {
     <>
       <ExamplesNavbar />
       <div className="wrapper">
+        
+        {/* BAGIAN HEADER (Pakai headerStyle / Gradient) */}
         <div className="page-header">
-          {/* GUNAKAN headerStyle DI SINI */}
           <div className="page-header" style={headerStyle}></div>
 
           <img
@@ -160,17 +160,14 @@ export default function LandingPage() {
           </div>
         </div>
 
-        
-        <section className="section section-lg">
-          
+        {/* BAGIAN BAWAH 1 (Pakai bodyStyle / Solid) */}
+        <section className="section section-lg" style={bodyStyle}>
           <section className="section">
-            
             <img
               alt="..."
               className="path"
               src={path4Img}
             />
-
             <Container>
               <Row className="row-grid justify-content-between">
                 <Col className="mt-lg-5" md="5">
@@ -290,11 +287,10 @@ export default function LandingPage() {
               </Row>
             </Container>
           </section>
-        
         </section>
         
-        
-        <section className="section section-lg">
+        {/* BAGIAN BAWAH 2 (Pakai bodyStyle / Solid) */}
+        <section className="section section-lg" style={bodyStyle}>
           <img
             alt="..."
             className="path"
@@ -362,7 +358,9 @@ export default function LandingPage() {
             </Row>
           </Container>
         </section>
-        <section className="section section-lg section-safe">
+
+        {/* BAGIAN BAWAH 3 (Pakai bodyStyle / Solid) */}
+        <section className="section section-lg section-safe" style={bodyStyle}>
           <img
             alt="..."
             className="path"
@@ -455,7 +453,9 @@ export default function LandingPage() {
             </Row>
           </Container>
         </section>
-        <section className="section section-lg">
+
+        {/* BAGIAN BAWAH 4 (Pakai bodyStyle / Solid) */}
+        <section className="section section-lg" style={bodyStyle}>
           <img
             alt="..."
             className="path"
@@ -488,7 +488,9 @@ export default function LandingPage() {
             </Card>
           </Col>
         </section>
-        <section className="section section-lg section-coins">
+
+        {/* BAGIAN BAWAH 5 (Pakai bodyStyle / Solid) */}
+        <section className="section section-lg section-coins" style={bodyStyle}>
           <Container>
             <Row>
               <Col md="4">
