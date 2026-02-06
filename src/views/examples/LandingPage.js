@@ -148,13 +148,64 @@ export default function LandingPage() {
               
               {/* 1. JUDUL */}
               <div className="text-center mb-5">
-                <h1 className="font-weight-bold text-white mb-2" style={{ fontSize: "3rem" }}>
-                  Hello, 👋 I am <span style={{ color: "#AF47D2" }}>Dewa</span>
+                {/* 1. KITA SUNTIK CSS ANIMASI DI SINI */}
+                <style>
+                {`
+                  /* Animasi Muncul dari Bawah (Fade In Up) */
+                  @keyframes fadeInUp {
+                    from {
+                      opacity: 0;
+                      transform: translate3d(0, 40px, 0);
+                    }
+                    to {
+                      opacity: 1;
+                      transform: translate3d(0, 0, 0);
+                    }
+                  }
+
+                  /* Animasi Tangan Dadah (Wave) */
+                  @keyframes wave {
+                    0% { transform: rotate(0deg); }
+                    10% { transform: rotate(14deg); }
+                    20% { transform: rotate(-8deg); }
+                    30% { transform: rotate(14deg); }
+                    40% { transform: rotate(-4deg); }
+                    50% { transform: rotate(10deg); }
+                    60% { transform: rotate(0deg); }
+                    100% { transform: rotate(0deg); }
+                  }
+
+                  .hero-title {
+                    opacity: 0; /* Mulai dari ilang dulu */
+                    animation: fadeInUp 0.8s ease-out forwards;
+                  }
+                  
+                  .hero-subtitle {
+                    opacity: 0;
+                    animation: fadeInUp 0.8s ease-out forwards;
+                    animation-delay: 0.3s; /* Muncul telat dikit biar gantian */
+                  }
+
+                  .wave-emoji {
+                    display: inline-block;
+                    animation: wave 2.5s infinite; /* Dadah terus-terusan */
+                    transform-origin: 70% 70%;
+                  }
+                `}
+                </style>
+
+                {/* 2. INI ELEMENT JUDULNYA */}
+                <h1 
+                className="font-weight-bold text-white mb-2 hero-title" 
+                style={{ fontSize: "3rem" }}
+                >
+                Hello, <span className="wave-emoji">👋</span> I am <span style={{ color: "#AF47D2" }}>Dewa</span>
                 </h1>
-                <h3 className="text-white font-weight-light mt-0">
-                  Project Manager, Analyst & Full Stack
+
+                <h3 className="text-white font-weight-light mt-0 hero-subtitle">
+                Project Manager, Analyst & Full Stack
                 </h3>
-              </div>
+                </div>
 
               {/* 2. BENTO GRID (LAYOUT SEJAJAR 3 KOLOM) */}
               <Row className="align-items-center justify-content-center">
