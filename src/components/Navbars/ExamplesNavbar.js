@@ -25,7 +25,7 @@ export default function ExamplesNavbar() {
       document.documentElement.scrollTop > 99 ||
       document.body.scrollTop > 99
     ) {
-      setColor("navbar-transparent"); //navbarscroll
+      setColor("navbar-scrolled"); //navbarscroll
     } else if (
       document.documentElement.scrollTop < 100 ||
       document.body.scrollTop < 100

@@ -20,8 +20,8 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import Footer from "components/Footer/Footer.js";
 
 import bigChartData from "variables/charts.js";
-import Typewriter from 'typewriter-effect';
 
+// Images
 import blobImg from "assets/img/blob.png";
 import path2Img from "assets/img/path2.png";
 import trianglesImg from "assets/img/triunghiuri.png";
@@ -35,139 +35,172 @@ import profileImg from "assets/img/profile.jpg";
 import bitcoinImg from "assets/img/bitcoin.png";
 import rippImg from "assets/img/ripp.png";
 
+// --- KOMPONEN TOMBOL MENU (VERSI LEBIH KECIL/COMPACT) ---
+const MenuCard = ({ icon, text, link }) => (
+  <Button
+    className="shadow-lg d-flex align-items-center justify-content-start w-100 mb-3 p-2"
+    color=""
+    href={link}
+    style={{
+      backgroundColor: "rgba(175, 71, 210, 0.2)",
+      backgroundImage: "none",
+      border: "none",
+      borderRadius: "15px",
+      transition: "all 0.3s ease",
+      minHeight: "40px", 
+    }}
+    
+    // --- PERHATIKAN BAGIAN INI (PAKE 'setProperty' & 'important') ---
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = "scale(1.05)";
+      e.currentTarget.style.boxShadow = "0 10px 25px rgba(175,71,210,0.7)";
+      
+      // JANGAN PAKE '='. PAKE INI:
+      e.currentTarget.style.setProperty("background-color", "rgba(175, 71, 210, 0.7)", "important");
+      e.currentTarget.style.setProperty("background-image", "none", "important");
+    }}
+    
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = "scale(1)";
+      e.currentTarget.style.boxShadow = "0 1rem 3rem rgba(175,71,210,0.7)"; 
+      
+      // BALIKIN JUGA PAKE 'important'
+      e.currentTarget.style.setProperty("background-color", "rgba(175, 71, 210, 0.2)", "important");
+      e.currentTarget.style.setProperty("background-image", "none", "important");
+    }}
+  >
+    {/* Icon Lingkaran Hitam */}
+    <div
+      className="d-flex align-items-center justify-content-center mr-3 shadow-sm"
+      style={{
+        width: "25px", height: "25px", minWidth: "25px",
+        borderRadius: "50%", backgroundColor: "#000", color: "#fff",
+      }}
+    >
+      <i className={icon} style={{ fontSize: "14px" }} />
+    </div>
+    
+    {/* Teks */}
+    <div className="d-flex justify-content-between align-items-center w-100">
+      <span
+        className="text-white font-light-bold text-left"
+        style={{ fontSize: "0.8rem", textTransform: "capitalize", lineHeight: "1.2" }}
+      >
+        {text}
+      </span>
+      <i className="tim-icons icon-minimal-right text-muted ml-2" style={{ color:"#fff", fontSize: "0.8rem" }} />
+    </div>
+  </Button>
+);
+
 export default function LandingPage() {
   React.useEffect(() => {
+    // 1. Setup Class Body
     document.body.classList.toggle("landing-page");
+    
+    // 2. PERBAIKAN BIRU: Paksa background body jadi hitam & matikan scroll samping
+    document.documentElement.style.overflowX = "hidden";
+    document.body.style.overflowX = "hidden";
+    document.body.style.backgroundColor = "#050505"; // Timpa warna biru default
+    document.body.style.backgroundImage = "linear-gradient(to bottom, #050505, #1a1a1a)";
+
     return function cleanup() {
       document.body.classList.toggle("landing-page");
+      // Reset style saat keluar halaman (opsional)
+      document.body.style.overflowX = "auto";
+      document.body.style.backgroundColor = "";
+      document.body.style.backgroundImage = "";
     };
   }, []);
 
-  // --- CONFIGURATION ---
-
-  // 1. Style HEADER: Pakai Gradient
   const headerStyle = {
-    background: "linear-gradient(to bottom, #190a05, #303841)" 
+    background: "transparent", // Ubah jadi transparan karena body sudah diwarnai
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "center",
+    paddingTop: "80px",
+    position: "relative",
+    overflow: "hidden", // Mencegah shape keluar layar
+    width: "100%",      // Pastikan full width
   };
 
-  // 2. Style SISA BODY: Pakai 1 Warna Solid
-  // (Pastikan warna ini sama dengan warna akhir gradient header biar nyambung)
   const bodyStyle = {
-    background: "#303841" 
+    background: "transparent",
   };
 
   return (
     <>
       <ExamplesNavbar />
-      <div className="wrapper">
+      {/* Wrapper diberi overflow-hidden untuk keamanan ganda */}
+      <div className="wrapper" style={{ overflowX: "hidden", width: "100%" }}>
         
-        {/* BAGIAN HEADER (Pakai headerStyle / Gradient) */}
-        <div className="page-header">
-          <div className="page-header" style={headerStyle}></div>
+        {/* --- BAGIAN HEADER UTAMA --- */}
+        <div className="page-header" style={headerStyle}>
+          <img alt="..." className="path" src={blobImg} />
+          <img alt="..." className="path2" src={path2Img} />
+          <img alt="..." className="shapes triangle" src={trianglesImg} />
+          <img alt="..." className="shapes wave" src={wavesImg} />
+          <img alt="..." className="shapes squares" src={squaresImg} />
+          <img alt="..." className="shapes circle" src={circlesImg} />
 
-          <img
-            alt="..."
-            className="path"
-            src={blobImg}
-          />
-          <img
-            alt="..."
-            className="path2"
-            src={path2Img}
-          />
-          <img
-            alt="..."
-            className="shapes triangle"
-            src={trianglesImg}
-          />
-          <img
-            alt="..."
-            className="shapes wave"
-            src={wavesImg}
-          />
-          <img
-            alt="..."
-            className="shapes squares"
-            src={squaresImg}
-          />
-          <img
-            alt="..."
-            className="shapes circle"
-            src={circlesImg}
-          />
-
-          <div className="content-center">
-            <Row className="row-grid justify-content-between align-items-center text-left">
-              <Col lg="6" md="6">
-                <h1 className="text-white">
-                  Halo, Saya <span className="text-warning">Budi Santoso</span> <br />
-                  <span className="text-white" style={{ fontSize: "0.6em" }}>
-                    I am a
-                    <span className="text-success">
-                      <Typewriter
-                        options={{
-                          strings: [
-                            "Web Developer",
-                            "UI/UX Designer",
-                            "React Specialist",
-                            "Freelancer"
-                          ],
-                          autoStart: true,
-                          loop: true,
-                        }}
-                      />
-                    </span>
-                  </span>
-                </h1>
-                <p className="text-white mb-3">
-                  Saya membantu mengubah ide menjadi website yang modern, cepat, dan interaktif. 
-                  Fokus pada React JS dan desain yang user-friendly.
-                </p>
-                <div className="btn-wrapper mb-3">
-                  <Button
-                    className="btn-link"
-                    color="success"
-                    href="#portfolio"
-                    size="sm"
-                  >
-                    <i className="tim-icons icon-spaceship" /> Lihat Project Saya
-                  </Button>
-                </div>
-                <div className="btn-wrapper">
-                  <div className="button-container">
-                    <Button className="btn-icon btn-simple btn-round btn-neutral" color="default" href="https://github.com/username">
-                      <i className="fab fa-github" />
-                    </Button>
-                    <Button className="btn-icon btn-simple btn-round btn-neutral" color="default" href="https://linkedin.com/in/username">
-                      <i className="fab fa-linkedin" />
-                    </Button>
-                    <Button className="btn-icon btn-simple btn-round btn-neutral" color="default" href="https://instagram.com/username">
-                      <i className="fab fa-instagram" />
-                    </Button>
-                  </div>
-                </div>
-              </Col>
+          <div className="content-center w-100">
+            <Container>
               
-              <Col lg="4" md="5">
-                <img
-                  alt="Profile"
-                  className="img-fluid floating"
-                  src={profileImg}
-                  style={{ borderRadius: "50%", border: "0.8px solid #1f8ef1", mixBlendMode: "overlay"}} 
-                />
-              </Col>
-            </Row>
+              {/* 1. JUDUL */}
+              <div className="text-center mb-5">
+                <h1 className="font-weight-bold text-white mb-2" style={{ fontSize: "3rem" }}>
+                  Hello, 👋 I am <span style={{ color: "#AF47D2" }}>Dewa</span>
+                </h1>
+                <h3 className="text-white font-weight-light mt-0">
+                  Project Manager, Analyst & Full Stack
+                </h3>
+              </div>
+
+              {/* 2. BENTO GRID (LAYOUT SEJAJAR 3 KOLOM) */}
+              <Row className="align-items-center justify-content-center">
+                
+                {/* KIRI */}
+                <Col lg="3" md="5" xs="6" className="order-1 order-lg-1 px-2">
+                  <MenuCard icon="tim-icons icon-single-02" text="About Me" link="#about" />
+                  <MenuCard icon="tim-icons icon-paper" text="Resume" link="#resume" />
+                  <MenuCard icon="tim-icons icon-briefcase-24" text="My Works" link="#portfolio" />
+                </Col>
+
+                {/* TENGAH (FOTO) */}
+                <Col lg="4" md="12" xs="12" className="text-center order-2 order-lg-2 mb-4 mb-lg-0">
+                  <div className="profile-wrapper" style={{ position: "relative", display: "inline-block" }}>
+                    <img
+                      alt="Profile"
+                      className="img-fluid floating shadow-lg"
+                      src={profileImg}
+                      style={{
+                        maxHeight: "380px",
+                        width: "auto",
+                        borderRadius: "25px",
+                        border: "1px solid rgba(255,255,255,0.2)",
+                        objectFit: "cover"
+                      }}
+                    />
+                  </div>
+                </Col>
+
+                {/* KANAN */}
+                <Col lg="3" md="5" xs="6" className="order-1 order-lg-3 px-2">
+                  <MenuCard icon="tim-icons icon-email-85" text="Contact Me" link="#contact" />
+                  <MenuCard icon="fab fa-linkedin" text="LinkedIn" link="https://linkedin.com" />
+                  <MenuCard icon="fab fa-instagram" text="Instagram" link="https://instagram.com" />
+                </Col>
+
+              </Row>
+
+            </Container>
           </div>
         </div>
 
-        {/* BAGIAN BAWAH 1 (Pakai bodyStyle / Solid) */}
+        {/* --- BAGIAN STATISTIK --- */}
         <section className="section section-lg" style={bodyStyle}>
           <section className="section">
-            <img
-              alt="..."
-              className="path"
-              src={path4Img}
-            />
+            <img alt="..." className="path" src={path4Img} />
             <Container>
               <Row className="row-grid justify-content-between">
                 <Col className="mt-lg-5" md="5">
@@ -260,7 +293,7 @@ export default function LandingPage() {
                   <div className="pl-md-5">
                     <h1>
                       Large <br />
-                      Achivements
+                      Achievements
                     </h1>
                     <p>
                       I should be capable of drawing a single stroke at the
@@ -288,24 +321,12 @@ export default function LandingPage() {
             </Container>
           </section>
         </section>
-        
-        {/* BAGIAN BAWAH 2 (Pakai bodyStyle / Solid) */}
+
+        {/* --- BAGIAN BENEFITS --- */}
         <section className="section section-lg" style={bodyStyle}>
-          <img
-            alt="..."
-            className="path"
-            src={path4Img}
-          />
-          <img
-            alt="..."
-            className="path2"
-            src={path5Img}
-          />
-          <img
-            alt="..."
-            className="path3"
-            src={path2Img}
-          />
+          <img alt="..." className="path" src={path4Img} />
+          <img alt="..." className="path2" src={path5Img} />
+          <img alt="..." className="path3" src={path2Img} />
           <Container>
             <Row className="justify-content-center">
               <Col lg="12">
@@ -359,13 +380,9 @@ export default function LandingPage() {
           </Container>
         </section>
 
-        {/* BAGIAN BAWAH 3 (Pakai bodyStyle / Solid) */}
+        {/* --- BAGIAN FEATURES --- */}
         <section className="section section-lg section-safe" style={bodyStyle}>
-          <img
-            alt="..."
-            className="path"
-            src={path5Img}
-          />
+          <img alt="..." className="path" src={path5Img} />
           <Container>
             <Row className="row-grid justify-content-between">
               <Col md="5">
@@ -412,9 +429,9 @@ export default function LandingPage() {
                   <hr className="line-success" />
                   <h3>Awesome features</h3>
                   <p>
-                    The design system comes with three pre-built pages to help
-                    you get started faster. You can change the text and images
-                    and you're good to go.
+                    The design system comes with three pre-built pages to help you
+                    get started faster. You can change the text and images and
+                    you're good to go.
                   </p>
                   <ul className="list-unstyled mt-5">
                     <li className="py-2">
@@ -454,18 +471,10 @@ export default function LandingPage() {
           </Container>
         </section>
 
-        {/* BAGIAN BAWAH 4 (Pakai bodyStyle / Solid) */}
+        {/* --- BAGIAN CHART --- */}
         <section className="section section-lg" style={bodyStyle}>
-          <img
-            alt="..."
-            className="path"
-            src={path4Img}
-          />
-          <img
-            alt="..."
-            className="path2"
-            src={path2Img}
-          />
+          <img alt="..." className="path" src={path4Img} />
+          <img alt="..." className="path2" src={path2Img} />
           <Col md="12">
             <Card className="card-chart card-plain">
               <CardHeader>
@@ -489,7 +498,7 @@ export default function LandingPage() {
           </Col>
         </section>
 
-        {/* BAGIAN BAWAH 5 (Pakai bodyStyle / Solid) */}
+        {/* --- BAGIAN SKILLS --- */}
         <section className="section section-lg section-coins" style={bodyStyle}>
           <Container>
             <Row>
@@ -508,7 +517,7 @@ export default function LandingPage() {
                     <img
                       alt="..."
                       className="img-center img-fluid"
-                      src={etherumImg} 
+                      src={etherumImg}
                       style={{ width: "100px" }}
                     />
                   </CardHeader>
@@ -590,6 +599,7 @@ export default function LandingPage() {
             </Row>
           </Container>
         </section>
+
         <Footer />
       </div>
     </>
